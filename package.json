@@ -6,8 +6,9 @@
     "yarn": "1.15.2"
   },
   "scripts": {
+    "start": "node server.js",
     "build": "yarn --cwd frontend install && yarn --cwd frontend build",
-    "deploy": "cp -a client/build/. public/",
-    "heroku-postbuild": "npm start"
+    "deploy": "cp -a frontend/build/. public/",
+    "heroku-postbuild": "npm install --only=dev --no-shrinkwrap && npm run build"
   }
 }
