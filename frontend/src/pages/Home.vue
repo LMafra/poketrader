@@ -5,8 +5,10 @@
                     :pokemon="selectedPokemon"
                     @addTeamA="fillTeamA"
                     @addTeamB="fillTeamB")
-    display-team(:teamA="teamA"
-      :teamB="teamB")
+    display-team(
+                :teamA="teamA"
+                :teamB="teamB"
+                @tradeSuccess="tradePokemon")
     pokemon-card(v-for="(pokemon, index) in pokemons"
                 :key="index"
                 :pokemon="pokemon"
@@ -32,8 +34,7 @@ export default {
   data() {
     return {
       pokemons: [],
-      limitA: false,
-      limitB: false,
+      tradeId: 0,
       selectedPokemon: {},
       teamA: {
         trainer: 0,
@@ -44,9 +45,9 @@ export default {
         teamPokemons: [],
       },
       trade: {
+        trainer: 0,
         pokemonId: 0,
         tradeId: 0,
-        trainer: 0,
       },
     };
   },
@@ -73,43 +74,74 @@ export default {
           this.$notify(err);
         });
     },
-    tradePokemon(team) {
+    getLastTrade() {
       api
-        .post('/trades', team)
-        .then(() => {
-          this.$notify('Sucesso');
+        .get('/trades/last')
+        .then((res) => {
+          this.tradeId = res.data;
         })
         .catch((err) => {
           this.$notify(err);
         });
+    },
+    tradePokemon() {
+      this.trade.tradeId = this.tradeId + 1;
+      if (!this.teamA && !this.teamB) {
+        this.$notify('Preencha os times');
+        return;
+      }
+      if (this.teamA) {
+        this.teamA.teamPokemons.forEach((teamA) => {
+          this.trade.pokemonId = teamA.pokemon.id;
+          this.trade.trainer = this.teamA.trainer;
+          api.post('/trades', this.trade)
+            .then(() => {
+              this.$notify('Sucesso');
+            })
+            .catch((err) => {
+              this.$notify(err);
+            });
+        });
+      }
+      if (this.teamB) {
+        this.teamB.teamPokemons.forEach((teamB) => {
+          this.trade.pokemonId = teamB.pokemon.id;
+          this.trade.trainer = this.teamB.trainer;
+          api.post('/trades', this.trade)
+            .then(() => {
+              this.$notify('Sucesso');
+            })
+            .catch((err) => {
+              this.$notify(err);
+            });
+        });
+      }
     },
     selectPokemonToTeam(pokemon) {
       this.selectedPokemon = pokemon;
     },
     fillTeamA(pokemon) {
       if (this.teamA.teamPokemons.length >= 6) {
-        this.limitA = true;
         return;
       }
       this.teamA.trainer = 0;
-      this.teamA.teamPokemons
-        .push({ pokemon });
+      this.teamA.teamPokemons.push({ pokemon });
     },
     fillTeamB(pokemon) {
       if (this.teamB.teamPokemons.length >= 6) {
-        this.limitB = true;
         return;
       }
       this.teamB.trainer = 1;
-      this.teamB.teamPokemons
-        .push({ pokemon });
+      this.teamB.teamPokemons.push({ pokemon });
     },
   },
   async mounted() {
     this.loadPokemons();
+    this.getLastTrade();
   },
   // updated() {
   //   this.loadPokemons();
+  //   this.getLastTrade();
   // },
 };
 </script>

@@ -3,7 +3,9 @@ div
   h1 Trocas Realizadas
   div(v-for="trade in trades")
     span {{ trade.trade_id }}
+    img(:src="trade.sprite")
     span {{ trade.name }}
+    span {{ trade.trainer }}
 </template>
 
 <script>
@@ -14,7 +16,8 @@ export default {
   name: 'TradeHistory',
   data() {
     return {
-      trades: [],
+      teamA: {},
+      teamB: {},
     };
   },
   computed: {},

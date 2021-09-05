@@ -5,7 +5,6 @@ import Notifications from 'vue-notification';
 import './assets/global.css';
 import App from './App';
 import router from './router';
-// Importing the global css file
 
 Vue.config.productionTip = false;
 Vue.use(Notifications);

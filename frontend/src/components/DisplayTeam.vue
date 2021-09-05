@@ -1,17 +1,16 @@
 <template lang="pug">
 div
   div
-    span {{ teamA.trainer }}
-    span {{ teamA.teamPokemons.length }}
-    div(v-for="(pokemon, index) in teamA.teamPokemons" :key="index")
+    span Time A
+    div(v-for="(pokemon, index) in teamA.teamPokemons"
+        :key="index")
       span {{ pokemon.pokemon.name }}
   div
-    span {{ teamB.trainer }}
-    span {{ teamB.teamPokemons.length }}
-    div(v-for="(pokemon, index) in teamB.teamPokemons" :key="index")
+    span Time B
+    div(v-for="(pokemon, index) in teamB.teamPokemons"
+        :key="index")
       span {{ pokemon.pokemon.name }}
-  div
-    button(@click="sumBaseExperienceA") Realizar trocar
+  button(@click="tradePokemons") Realizar trocar
 </template>
 
 <script>
@@ -29,7 +28,6 @@ export default {
   },
   data() {
     return {
-      trainerTeam: [],
       totalPointsteamA: 0,
       totalPointsteamB: 0,
     };
@@ -38,14 +36,26 @@ export default {
   },
   methods: {
     sumBaseExperienceA() {
-      const pkmsA = this.teamA.teamPokemons.map(p => p.pokemon);
-      this.totalPointsteamA = pkmsA.reduce((acc, item) => acc + item.base_experience, 0);
+      const pkms = this.teamA.teamPokemons.map(p => p.pokemon);
+      this.totalPointsteamA = pkms.reduce((acc, item) => acc + item.base_experience, 0);
     },
     sumBaseExperienceB() {
-      const pkmsB = this.teamB.teamPokemons.map(p => p.pokemon);
-      this.totalPointsteamB = pkmsB.reduce((acc, item) => acc + item.base_experience, 0);
+      const pkms = this.teamB.teamPokemons.map(p => p.pokemon);
+      this.totalPointsteamB = pkms.reduce((acc, item) => acc + item.base_experience, 0);
     },
     tradePokemons() {
+      this.sumBaseExperienceA();
+      this.sumBaseExperienceB();
+      if (Math.abs(this.totalPointsteamA - this.totalPointsteamB) > 50) {
+        this.$notify({
+          color: 'red',
+          group: 'notification',
+          position: 'top center',
+          text: 'Amigo, a troca está injusta',
+        });
+        return;
+      }
+      this.$emit('tradeSuccess');
     },
   },
 };
