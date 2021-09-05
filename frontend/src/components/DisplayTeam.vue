@@ -46,8 +46,7 @@ export default {
       this.totalPointsteamB = pkmsB.reduce((acc, item) => acc + item.base_experience, 0);
     },
     tradePokemons() {
-
-    }
+    },
   },
 };
 </script>
