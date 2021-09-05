@@ -9,6 +9,6 @@
     "start": "node backend/src/server.js",
     "build": "yarn --cwd frontend install && yarn --cwd frontend build",
     "deploy": "cp -a frontend/build/. public/",
-    "heroku-postbuild": "npm install --only=dev --no-shrinkwrap && npm run build"
+    "heroku-postbuild": "npm run build"
   }
 }
