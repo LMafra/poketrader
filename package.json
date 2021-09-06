@@ -2,7 +2,10 @@
   "name": "poketrader",
   "version": "1.0.0",
   "description": "![alt text](https://i2.wp.com/i.imgur.com/Gc979LS.gif?w=640) # PokéTrader",
-  "main": "index.js",
+  "engines": {
+    "node": "10.15.3",
+    "yarn": "1.15.2"
+  },
   "scripts": {
     "postinstall": "yarn --cwd frontend install && yarn --cwd frontend build",
     "start": "node backend/src/server.js"
