@@ -17,8 +17,8 @@ app.use(haltOnTimedout);
 app.use(express.json());
 app.use(routes);
 app.use(haltOnTimedout);
-app.use(serveStatic(path.join(__dirname, '/dist')));
 app.use(haltOnTimedout);
+app.use(serveStatic(path.join(__dirname, '/dist')));
 
 app.use('/', (req, res) => {
   res.render(path.join(__dirname, '/dist'));
