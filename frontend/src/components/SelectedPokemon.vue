@@ -1,19 +1,20 @@
 <template lang="pug">
 v-container
-  v-row
-    v-col(align="center")
+  v-layout(column wrap align-center)
+    v-flex(xs12 sm8)
       v-img(:src="pokemon.sprite" max-height="150" max-width="150")
-      v-col(align="start")
+      v-flex
         span {{ pokemon.name }}
-      v-col(align="start")
+      v-flex
         span Base Experience: {{ pokemon.base_experience }}
-      v-col(align="start")
+      v-flex
         span Altura: {{ pokemonHeight }} m
-      v-col(align="start")
+      v-flex
         span Peso: {{ pokemonWeight }} kg
-  v-row(align="center")
-    v-col(align="center")
+  v-layout(row wrap justify-center)
+    v-flex(xs12 sm4)
       v-btn(@click="addTeamA") Time A
+    v-flex(xs12 sm4)
       v-btn(@click="addTeamB") Time B
 </template>
 

@@ -1,21 +1,20 @@
 <template lang="pug">
 v-container
-  v-row
-    v-col(align="center")
-      span Time A
+  v-layout(row wrap justify-center align-center)
+    v-flex(xs12 sm4)
+      h3 Time A
       div(v-for="(pokemon, index) in teamA.teamPokemons"
           :key="index")
         v-img(:src="pokemon.pokemon.sprite" max-height="100" max-width="100")
-        span {{ pokemon.pokemon.name }}
-    v-col(align="center")
-      span Time B
+    v-flex(xs12 sm4)
+      h3 Time B
       div(v-for="(pokemon, index) in teamB.teamPokemons"
           :key="index")
         v-img(:src="pokemon.pokemon.sprite" max-height="100" max-width="100")
-        span {{ pokemon.pokemon.name }}
-  v-row(align="center")
-    v-col(align="center")
+  v-layout(row wrap justify-center align-center)
+    v-flex(xs12 sm6)
       v-btn(cols="6" @click="tradePokemons") Realizar troca
+    v-flex(xs12 sm6)
       v-btn(cols="6" @click="resetTrade") Reiniciar troca
 </template>
 

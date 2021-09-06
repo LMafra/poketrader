@@ -1,11 +1,9 @@
 <template lang="pug">
-v-container
-  v-row
-    v-col
-      span {{ trade.trade }}
-      pokemon-trade(v-for="(team, index) in teams"
-                    :team="team"
-                    :key="index")
+v-layout(row wrap justify-center class="my-5")
+  h1 Troca Nº {{ trade.trade }}
+  pokemon-trade(v-for="(team, index) in teams"
+          :team="team"
+          :key="index")
 </template>
 
 <script>

@@ -1,9 +1,10 @@
 <template lang="pug">
 v-container(@submit.prevent="submit")
-  v-row
-    v-col
-      v-text-field(label="Adicionar Novo Pokémon" v-model="form.pokemonName")
-      v-btn(type="submit" @click="add") Adicionar
+  v-layout(column wrap class="my-5" align-center)
+    v-flex(xs12 sm4 class="my-3")
+      div(class="text-xs-center")
+        v-text-field(label="Adicionar Novo Pokémon" v-model="form.pokemonName")
+        v-btn(type="submit" @click="add") Adicionar
 </template>
 
 <script>
