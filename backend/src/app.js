@@ -18,4 +18,8 @@ app.use(routes);
 app.use(serveStatic(path.join(__dirname, 'dist')));
 app.use(haltOnTimedout);
 
+app.get('/', (req, res) => {
+  res.render('root');
+});
+
 module.exports = app;
