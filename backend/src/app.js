@@ -20,7 +20,9 @@ app.use(haltOnTimedout);
 app.use(serveStatic(path.join(__dirname, '/dist')));
 app.use(haltOnTimedout);
 
-app.use(express.static(path.join(__dirname, '/dist')));
+app.use('/', (req, res) => {
+  res.send(path.join(__dirname, '/dist'));
+});
 
 app.use('/.*/', (req, res) => {
   res.sendFile(path.join(__dirname, '/dist/index.html'));
