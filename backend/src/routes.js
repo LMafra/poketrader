@@ -5,6 +5,9 @@ const TradeController = require('./controllers/tradeController');
 
 const routes = express.Router();
 
+routes.get('/', (req, res) => {
+  res.json({ message: 'Welcome to the PokeTrader API!' });
+});
 routes.get('/pokemons', PokemonController.index);
 routes.post('/pokemons/:name', PokemonController.create);
 

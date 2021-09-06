@@ -21,8 +21,4 @@ app.use(haltOnTimedout);
 app.use(serveStatic(path.join(__dirname, 'dist')));
 app.use(haltOnTimedout);
 
-app.get('/', (req, res) => {
-  res.send('root');
-});
-
 module.exports = app;
