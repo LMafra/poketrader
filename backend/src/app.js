@@ -17,9 +17,11 @@ app.use(haltOnTimedout);
 app.use(express.json());
 app.use(routes);
 app.use(haltOnTimedout);
-app.use(serveStatic(path.join(__dirname, 'dist')));
+app.use(serveStatic(path.join(__dirname, '/dist')));
 app.use(haltOnTimedout);
 
-app.use('/', routes);
+app.use('/.*/', (req, res) => {
+  res.sendFile(__dirname, '/public.index.html');
+});
 
 module.exports = app;
