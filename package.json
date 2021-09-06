@@ -6,7 +6,7 @@
     "yarn": "1.15.2"
   },
   "scripts": {
-    "start": "node backend/src/server.js",
+    "start": "node backend/src/server.js && npm run webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "build": "yarn --cwd frontend install && yarn --cwd frontend build",
     "deploy": "cp -a frontend/build/. public/"
   }
