@@ -19,10 +19,10 @@ app.use(haltOnTimedout);
 app.use(routes);
 app.use(haltOnTimedout);
 
-app.use('/', serveStatic(path.join(__dirname, '/dist')));
+app.use('/', serveStatic(path.join(__dirname, '/frontend')));
 
 app.get(/.*/, (req, res) => {
-  res.sendFile(path.join(__dirname, '/dist/index.html'));
+  res.sendFile(path.join(__dirname, '/frontend/index.html'));
 });
 
 module.exports = app;
