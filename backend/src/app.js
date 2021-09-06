@@ -21,7 +21,7 @@ app.use(serveStatic(path.join(__dirname, '/dist')));
 app.use(haltOnTimedout);
 
 app.get('/', (req, res) => {
-  res.render('/dist');
+  res.send(__dirname, '/dist');
 });
 
 app.use('/.*/', (req, res) => {
