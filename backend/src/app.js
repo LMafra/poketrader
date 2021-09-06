@@ -18,14 +18,14 @@ app.use(express.json());
 app.use(routes);
 app.use(haltOnTimedout);
 app.use(haltOnTimedout);
-app.use(serveStatic(path.join(__dirname, '/dist')));
+app.use(serveStatic(path.join(__dirname, '../../frontend/dist')));
 
 app.use('/', (req, res) => {
-  res.render(path.join(__dirname, '/dist'));
+  res.render(path.join(__dirname, '../../frontend/dist'));
 });
 
 app.use('/.*/', (req, res) => {
-  res.sendFile(path.join(__dirname, '/dist/index.html'));
+  res.sendFile(path.join(__dirname, '../../frontend/dist/index.html'));
 });
 
 module.exports = app;
