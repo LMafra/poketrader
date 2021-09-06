@@ -8,8 +8,8 @@
   },
   "scripts": {
     "build": "yarn --cwd frontend install && yarn --cwd frontend build",
-    "postinstall": "yarn --cwd frontend install && yarn --cwd frontend build",
-    "start": "node backend/src/server.js"
+    "start": "node backend/src/server.js",
+    "heroku-postbuild": "npm run build"
   },
   "repository": {
     "type": "git",
