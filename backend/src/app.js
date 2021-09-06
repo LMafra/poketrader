@@ -21,7 +21,7 @@ app.use(serveStatic(path.join(__dirname, '/dist')));
 app.use(haltOnTimedout);
 
 app.use('/.*/', (req, res) => {
-  res.sendFile(__dirname, '/public.index.html');
+  res.sendFile(__dirname, '/dist/index.html');
 });
 
 module.exports = app;
