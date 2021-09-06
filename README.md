@@ -14,6 +14,19 @@ O backend tem o papel de alimentar o front com as informações da Api. Foi cons
 
 #### Como compilar 
 
+Para rodar o banco, basta entrar na pasta backend e rodar o seguinte comandos:
+
+```js
+  knex migrate:latest
+```
+
+Caso queira deletar o banco, basta rodar o seguinte comando:
+
+```js
+  knex migrate:rollback
+```
+
+
 Para compilar o código, basta entrar na pasta backend e rodar os seguintes comandos:
 
 ```js
