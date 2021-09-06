@@ -7,6 +7,7 @@
     "yarn": "1.15.2"
   },
   "scripts": {
+    "build": "yarn --cwd frontend install && yarn --cwd frontend build",
     "postinstall": "yarn --cwd frontend install && yarn --cwd frontend build",
     "start": "node backend/src/server.js"
   },
