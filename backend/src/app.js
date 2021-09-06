@@ -15,10 +15,11 @@ app.use(timeout('5s'));
 app.use(cors());
 app.use(haltOnTimedout);
 app.use(express.json());
-app.use(haltOnTimedout);
 app.use(routes);
 app.use(haltOnTimedout);
+app.use(serveStatic(path.join(__dirname, 'dist')));
+app.use(haltOnTimedout);
 
-app.use('/', serveStatic(path.join(__dirname, '/frontend')));
+app.use('/', routes);
 
 module.exports = app;
