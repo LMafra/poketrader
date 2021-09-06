@@ -1,7 +1,9 @@
 <template lang="pug">
-div(@submit.prevent="submit").addPokemon
-  input(v-model="form.pokemonName")
-  button(type="submit" @click="add") Adicionar
+v-container(@submit.prevent="submit")
+  v-row
+    v-col
+      v-text-field(label="Adicionar Novo Pokémon" v-model="form.pokemonName")
+      v-btn(type="submit" @click="add") Adicionar
 </template>
 
 <script>
@@ -21,7 +23,16 @@ export default {
     async add() {
       try {
         this.submitting = true;
-        this.$emit('addPokemon', this.form.pokemonName);
+        if (!this.form.pokemonName) {
+          this.$notify({
+            color: 'red',
+            group: 'notification',
+            position: 'top center',
+            text: 'Busca vazia',
+          });
+          return;
+        }
+        this.$emit('addPokemon', this.form.pokemonName.toLowerCase());
       } catch (err) {
         this.$notify(err);
         this.submitting = false;

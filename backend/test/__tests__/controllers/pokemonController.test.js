@@ -61,16 +61,15 @@ describe('pokemons', () =>{
 
   describe('POST /pokemons/:name', () =>{
     test('should get a Pokemon with PokeApi', async () => {
-      const { pokemons } = await request(app).post(`/pokemons/${pkm.arceus.name}`);
-      expect(pokemons).toBeTruthy();
+      const { pokemons } = await request(app).post(`/pokemons/${pkm.arceus.name}`).expect(200);
     });
     test('should get error with empty params', async () => {
-      const { pokemons } = await request(app).post(`/pokemons/`).expect(404);
+      const { pokemons } = await request(app).post(`/pokemons/${''}`).expect(404);
     });
     test('should get error with wrong name', async () => {
       const name = 'baba'
       const { pokemons } = await request(app).post(`/pokemons/${name}`);
-      expect(pokemons).toThrowError(error);
+      expect(pokemons).toThrowError();
     });
   });
 

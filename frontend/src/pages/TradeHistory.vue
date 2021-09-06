@@ -1,29 +1,44 @@
 <template lang="pug">
-div
-  h1 Trocas Realizadas
-  div(v-for="trade in trades")
-    span {{ trade.trade_id }}
-    img(:src="trade.sprite")
-    span {{ trade.name }}
-    span {{ trade.trainer }}
+v-app
+  v-toolbar(flat)
+    v-toolbar-title Pokemon Trader
+    v-spacer
+    v-toolbar-items
+      v-btn(text @click="goToTrade") Trades
+      v-btn(text @click="goToHistory") History
+  v-container(id="tradeHistory" fluid)
+    v-row(cols="12" lg="4" align="center")
+      v-col(cols="12" align="center")
+        h1 Trocas Realizadas
+        trade-info(v-for="(trade, index) in groupTrades"
+                  :trade="trade"
+                  :key="index")
 </template>
 
 <script>
 
+import _ from 'lodash';
 import api from '../services/api';
+
+import TradeInfo from '../components/TradeInfo';
+
 
 export default {
   name: 'TradeHistory',
+  components: {
+    TradeInfo,
+  },
   data() {
     return {
-      teamA: {},
-      teamB: {},
+      trades: [],
+      groupTrades: [],
     };
   },
-  computed: {},
+  computed: {
+  },
   methods: {
-    loadTrades() {
-      api
+    async loadTrades() {
+      await api
         .get('/trades')
         .then((res) => {
           this.trades = res.data;
@@ -31,6 +46,19 @@ export default {
         .catch((err) => {
           this.$notify(err);
         });
+      this.mapTrades();
+    },
+    mapTrades() {
+      this.groupTrades = _.chain(this.trades)
+        .groupBy('trade_id')
+        .map((value, key) => ({ trade: key, pokemons: value }))
+        .value();
+    },
+    goToTrade() {
+      this.$router.push({ name: 'Trade' });
+    },
+    goToHistory() {
+      this.$router.push({ name: 'History' });
     },
   },
   async mounted() {
