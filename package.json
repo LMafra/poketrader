@@ -4,8 +4,8 @@
   "description": "![alt text](https://i2.wp.com/i.imgur.com/Gc979LS.gif?w=640) # PokéTrader",
   "main": "index.js",
   "scripts": {
-    "postinstall": "npm run build",
-    "start": "node server.js"
+    "postinstall": "yarn --cwd frontend install && yarn --cwd frontend build",
+    "start": "node backend/src/server.js"
   },
   "repository": {
     "type": "git",
