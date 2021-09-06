@@ -18,8 +18,4 @@ app.use(routes);
 app.use(serveStatic(path.join(__dirname, 'dist')));
 app.use(haltOnTimedout);
 
-app.get('/', (req, res) => {
-  res.status(200);
-});
-
 module.exports = app;
