@@ -19,6 +19,6 @@ app.use(haltOnTimedout);
 app.use(routes);
 app.use(haltOnTimedout);
 
-app.use('/', serveStatic(path.join(__dirname, '/frontend')));
+app.use('/', serveStatic(path.join(__dirname, '/dist')));
 
 module.exports = app;
