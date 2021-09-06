@@ -12,7 +12,7 @@ v-app(light)
         v-layout(column align-center justify-center class="white--text")
           h1(class="white--text mb-2 display-1 text-xs-center"
           style="font-weight: 900; text-shadow: 3px 2px #000000")
-            span Calcule a sua troca e verifique se ela é justa
+            span Todas as trocas realizadas
     section
       v-container(grid-list-xl)
         v-layout(row wrap justify-center class="my-5")
